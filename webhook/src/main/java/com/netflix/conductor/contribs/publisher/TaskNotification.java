@@ -32,6 +32,8 @@ public class TaskNotification extends TaskSummary {
     private static final Logger LOGGER = LoggerFactory.getLogger(TaskStatusPublisher.class);
 
     public String workflowTaskType;
+    private String domainGroupMoId = "";
+    private String accountMoId = "";
 
     /**
      * following attributes doesnt exist in TaskSummary so add it here. Not adding in TaskSummary as
@@ -44,6 +46,14 @@ public class TaskNotification extends TaskSummary {
     private String taskDescription;
 
     private ObjectMapper objectMapper = new ObjectMapper();
+
+    public String getDomainGroupMoId() {
+        return domainGroupMoId;
+    }
+
+    public String getAccountMoId() {
+        return accountMoId;
+    }
 
     public String getReferenceTaskName() {
         return referenceTaskName;
@@ -70,6 +80,16 @@ public class TaskNotification extends TaskSummary {
         if (!isFusionMetaPresent) {
             return;
         }
+
+        LinkedHashMap fusionMeta = (LinkedHashMap) task.getInputData().get("_ioMeta");
+        domainGroupMoId =
+                fusionMeta.containsKey("DomainGroupMoId")
+                        ? fusionMeta.get("DomainGroupMoId").toString()
+                        : "";
+        accountMoId =
+                fusionMeta.containsKey("AccountMoId")
+                        ? fusionMeta.get("AccountMoId").toString()
+                        : "";
     }
 
     String toJsonString() {
