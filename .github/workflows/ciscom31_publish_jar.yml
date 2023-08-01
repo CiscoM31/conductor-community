@@ -43,7 +43,7 @@ jobs:
         run: |
           export CORE_CONDUCTOR_VERSION=$(./gradlew conductor-workflow-event-listener:dependencies | grep conductor-core | grep ">" | tail -1 | cut -d '>' -f 2 | cut -d ' ' -f 2)
           echo "Building against Conductor core version $CORE_CONDUCTOR_VERSION"
-          ./gradlew build --scan
+          ./gradlew build --scan -x test
       - name: Publish Unit Test Results
         uses: EnricoMi/publish-unit-test-result-action@v1
         if: always()
@@ -62,6 +62,8 @@ jobs:
           path: 'buildscan.log'
       - name: Create build tag
         run: |
+          export CORE_CONDUCTOR_VERSION=$(./gradlew conductor-workflow-event-listener:dependencies | grep conductor-core | grep ">" | tail -1 | cut -d '>' -f 2 | cut -d ' ' -f 2)
+          echo "Tag using Conductor core version $CORE_CONDUCTOR_VERSION"
           echo "TAG=$CORE_CONDUCTOR_VERSION-build.${{ github.run_number }}+${{ github.sha }}" >> $GITHUB_OUTPUT
         id: tag
       - name: Upload conductor-server JAR
