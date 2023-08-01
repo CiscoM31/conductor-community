@@ -62,7 +62,7 @@ jobs:
           path: 'buildscan.log'
       - name: Create build tag
         run: |
-          echo "TAG::build.${{ github.run_number }}+${{ github.sha }}" >> $GITHUB_OUTPUT
+          echo "TAG=$CORE_CONDUCTOR_VERSION-build.${{ github.run_number }}+${{ github.sha }}" >> $GITHUB_OUTPUT
         id: tag
       - name: Upload conductor-server JAR
         uses: ncipollo/release-action@v1
