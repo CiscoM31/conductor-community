@@ -62,7 +62,7 @@ jobs:
           path: 'buildscan.log'
       - name: Create build tag
         run: |
-          echo "TAG::$(git describe --abbrev=0 --tags --exclude '*-build.*')-build.${{ github.run_number }}+${{ github.sha }}" >> $GITHUB_OUTPUT
+          echo "TAG::build.${{ github.run_number }}+${{ github.sha }}" >> $GITHUB_OUTPUT
         id: tag
       - name: Upload conductor-server JAR
         uses: ncipollo/release-action@v1
