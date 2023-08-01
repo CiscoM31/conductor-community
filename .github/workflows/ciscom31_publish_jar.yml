@@ -60,4 +60,15 @@ jobs:
         with:
           name: build-scan
           path: 'buildscan.log'
+      - name: Create build tag
+        run: |
+          echo "::set-output name=TAG::$(git describe --abbrev=0 --tags --exclude '*-build.*')-build.${{ github.run_number }}+${{ github.sha }}"
+        id: tag
+      - name: Upload conductor-server JAR
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: "community-server/build/libs/conductor-community-server-*-boot.jar"
+          commit: ${{ github.sha }}
+          tag: ${{ steps.tag.outputs.TAG }}
+          token: ${{ github.token }}
 
