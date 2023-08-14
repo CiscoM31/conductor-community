@@ -41,7 +41,7 @@ jobs:
         run: |
           export CORE_CONDUCTOR_VERSION=$(./gradlew conductor-workflow-event-listener:dependencies | grep conductor-core | grep ">" | tail -1 | cut -d '>' -f 2 | cut -d ' ' -f 2)
           echo "Building against Conductor core version $CORE_CONDUCTOR_VERSION"
-          ./gradlew build --scan
+          ./gradlew getCiscoM31ConductorLibs build --scan
       - name: Publish Unit Test Results
         uses: EnricoMi/publish-unit-test-result-action@v1
         if: always()
