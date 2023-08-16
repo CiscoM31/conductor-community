@@ -30,8 +30,9 @@ plugins {
  * https://github.com/michel-kraemer/gradle-download-task#download-task
  */
 ext.urls = [
-    'https://github.com/CiscoM31/conductor-custom/releases/download/3.13-build.6%2Bff8277eaae311a917baf4c45da413d36385cd307/conductor-core-0.1.0-SNAPSHOT.jar': 'conductor-core-ciscom31.jar',
-    'https://github.com/CiscoM31/conductor-custom/releases/download/3.13-build.6%2Bff8277eaae311a917baf4c45da413d36385cd307/conductor-server-0.1.0-SNAPSHOT-boot.jar': 'conductor-server-ciscom31.jar'
+    'https://github.com/CiscoM31/conductor-custom/releases/download/3.13-build.7%2B71353d92f92d89cbf3679a66911f36c5dfa041da/conductor-core-0.1.0-SNAPSHOT.jar': 'conductor-core-ciscom31.jar',
+    'https://github.com/CiscoM31/conductor-custom/releases/download/3.13-build.7%2B71353d92f92d89cbf3679a66911f36c5dfa041da/conductor-common-0.1.0-SNAPSHOT.jar': 'conductor-common-ciscom31.jar',
+    'https://github.com/CiscoM31/conductor-custom/releases/download/3.13-build.7%2B71353d92f92d89cbf3679a66911f36c5dfa041da/conductor-rest-0.1.0-SNAPSHOT.jar': 'conductor-rest-ciscom31.jar'
 ]
 
 task getCiscoM31ConductorLibs(type: Download) {
