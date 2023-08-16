@@ -24,14 +24,22 @@ plugins {
 
 /**
  * Download dependencies from CiscoM31/conductor-custom files to build dir
+ * Set array of urls
+ * 
+ * Note: If only one download source has been given, adding an eachFile action will make the plugin fail. Refer
+ * https://github.com/michel-kraemer/gradle-download-task#download-task
  */
- task getCiscoM31ConductorLibs(type: Download) {
-    //array of urls
-    src([
-        'https://github.com/CiscoM31/conductor-custom/releases/download/3.13-build.6%2Bff8277eaae311a917baf4c45da413d36385cd307/conductor-core-0.1.0-SNAPSHOT.jar'
-    ])
+ext.urls = [
+    'https://github.com/CiscoM31/conductor-custom/releases/download/3.13-build.6%2Bff8277eaae311a917baf4c45da413d36385cd307/conductor-core-0.1.0-SNAPSHOT.jar': 'conductor-core-ciscom31.jar',
+    'https://github.com/CiscoM31/conductor-custom/releases/download/3.13-build.6%2Bff8277eaae311a917baf4c45da413d36385cd307/conductor-server-0.1.0-SNAPSHOT-boot.jar': 'conductor-server-ciscom31.jar'
+]
+
+task getCiscoM31ConductorLibs(type: Download) {
+    src urls.keySet()
     dest buildDir
-    overwrite true
+    eachFile { f ->
+        f.name = urls[f.sourceURL.toString()]
+    }
 }
 
 // Establish version and status
