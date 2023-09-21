@@ -4,10 +4,16 @@ plugins {
 
 ext['snakeyaml.version'] = revSnakeYaml
 
+configurations.all {
+    exclude group: "com.netflix.conductor", module: "conductor-common"
+    exclude group: "com.netflix.conductor", module: "conductor-core"
+    exclude group: "com.netflix.conductor", module: "conductor-rest"
+}
+
 dependencies {
 
 
-    implementation "com.netflix.conductor:conductor-rest:${revConductor}"
+    implementation files('../build/conductor-rest-ciscom31.jar')
     //implementation "com.netflix.conductor:conductor-core:${revConductor}"
     //use from CiscoM31/conductor-custom
     implementation files('../build/conductor-core-ciscom31.jar')
@@ -57,8 +63,8 @@ dependencies {
 
     runtimeOnly "org.glassfish.jaxb:jaxb-runtime:${revJAXB}"
 
-    testImplementation "com.netflix.conductor:conductor-rest:${revConductor}"
-    testImplementation "com.netflix.conductor:conductor-common:${revConductor}"
+    testImplementation files('../build/conductor-rest-ciscom31.jar')
+    testImplementation files('../build/conductor-common-ciscom31.jar')
     testImplementation "io.grpc:grpc-testing:${revGrpc}"
     testImplementation "com.google.protobuf:protobuf-java:${revProtoBuf}"
     testImplementation "io.grpc:grpc-protobuf:${revGrpc}"

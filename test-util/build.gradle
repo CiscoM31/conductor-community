@@ -3,12 +3,12 @@ plugins {
 }
 dependencies {
 
+    implementation files('../build/conductor-common-ciscom31.jar')
+    implementation files('../build/conductor-core-ciscom31.jar')
+    implementation files('../build/conductor-rest-ciscom31.jar')
 
-    implementation "com.netflix.conductor:conductor-common:${revConductor}"
-    implementation "com.netflix.conductor:conductor-core:${revConductor}"
     implementation "com.netflix.conductor:conductor-server:${revConductor}"
     implementation "com.netflix.conductor:conductor-client:${revConductor}"
-    implementation "com.netflix.conductor:conductor-rest:${revConductor}"
     implementation "com.netflix.conductor:conductor-grpc-server:${revConductor}"
     implementation "com.netflix.conductor:conductor-grpc-client:${revConductor}"
     implementation "com.netflix.conductor:conductor-redis-persistence:${revConductor}"
