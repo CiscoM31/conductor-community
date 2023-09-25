@@ -1,24 +1,24 @@
 plugins {
     id 'org.springframework.boot'
 }
-
 ext['snakeyaml.version'] = revSnakeYaml
 
 configurations.all {
     exclude group: "com.netflix.conductor", module: "conductor-common"
     exclude group: "com.netflix.conductor", module: "conductor-core"
     exclude group: "com.netflix.conductor", module: "conductor-rest"
+    exclude group: "com.netflix.conductor", module: "conductor-redis-persistence"
 }
 
 dependencies {
 
 
-    implementation files('../build/conductor-rest-ciscom31.jar')
+    implementation "com.cisco.conductor:conductor-core:${revConductorCustom}"
     //implementation "com.netflix.conductor:conductor-core:${revConductor}"
     //use from CiscoM31/conductor-custom
-    implementation files('../build/conductor-core-ciscom31.jar')
+    implementation "com.cisco.conductor:conductor-rest:${revConductorCustom}"
 
-    implementation "com.netflix.conductor:conductor-redis-persistence:${revConductor}"
+    implementation "com.cisco.conductor:conductor-redis-persistence:${revConductorCustom}"
     //implementation "com.netflix.conductor:conductor-cassandra-persistence:${revConductor}"
     //implementation "com.netflix.conductor:conductor-grpc-server:${revConductor}"
     //implementation "com.netflix.conductor:conductor-redis-lock:${revConductor}"
@@ -62,9 +62,9 @@ dependencies {
     implementation "org.springdoc:springdoc-openapi-ui:${revOpenapi}"
 
     runtimeOnly "org.glassfish.jaxb:jaxb-runtime:${revJAXB}"
+    implementation "com.cisco.conductor:conductor-rest:${revConductorCustom}"
+    implementation "com.cisco.conductor:conductor-common:${revConductorCustom}"
 
-    testImplementation files('../build/conductor-rest-ciscom31.jar')
-    testImplementation files('../build/conductor-common-ciscom31.jar')
     testImplementation "io.grpc:grpc-testing:${revGrpc}"
     testImplementation "com.google.protobuf:protobuf-java:${revProtoBuf}"
     testImplementation "io.grpc:grpc-protobuf:${revGrpc}"

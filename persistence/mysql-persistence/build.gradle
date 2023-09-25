@@ -1,9 +1,9 @@
 dependencies {
 
     implementation project(':persistence:conductor-common-persistence')
-    implementation files('../../build/conductor-common-ciscom31.jar')
-    implementation files('../../build/conductor-core-ciscom31.jar')
 
+    implementation "com.cisco.conductor:conductor-core:${revConductorCustom}"
+    implementation "com.cisco.conductor:conductor-common:${revConductorCustom}"
 
     compileOnly 'org.springframework.boot:spring-boot-starter'
     compileOnly 'org.springframework.retry:spring-retry'

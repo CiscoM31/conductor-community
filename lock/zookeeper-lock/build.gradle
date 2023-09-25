@@ -1,6 +1,6 @@
 dependencies {
 
-    implementation files('../../build/conductor-core-ciscom31.jar')
+    implementation "com.cisco.conductor:conductor-core:${revConductorCustom}"
 
     compileOnly 'org.springframework.boot:spring-boot-starter'
 

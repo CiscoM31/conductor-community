@@ -1,8 +1,8 @@
 dependencies {
     compileOnly 'org.springframework.boot:spring-boot-starter'
 
-    implementation files('../../build/conductor-common-ciscom31.jar')
-    implementation files('../../build/conductor-core-ciscom31.jar')
+    implementation "com.cisco.conductor:conductor-core:${revConductorCustom}"
+    implementation "com.cisco.conductor:conductor-common:${revConductorCustom}"
 
     implementation "com.azure:azure-storage-blob:${revAzureStorageBlobSdk}"
     implementation "org.apache.commons:commons-lang3"

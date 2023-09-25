@@ -3,9 +3,10 @@ plugins {
 }
 dependencies {
 
-    implementation files('../build/conductor-common-ciscom31.jar')
-    implementation files('../build/conductor-core-ciscom31.jar')
-    implementation files('../build/conductor-rest-ciscom31.jar')
+    implementation "com.cisco.conductor:conductor-core:${revConductorCustom}"
+    implementation "com.cisco.conductor:conductor-common:${revConductorCustom}"
+    implementation "com.cisco.conductor:conductor-rest:${revConductorCustom}"
+
 
     implementation "com.netflix.conductor:conductor-server:${revConductor}"
     implementation "com.netflix.conductor:conductor-client:${revConductor}"
