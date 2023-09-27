@@ -40,9 +40,11 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
+          # as github is not allowing password token to be stored in build files, unable to store conductor-custom deliverables into github packages
+          # hence executing conductor-custom build so that conductor-custom deliverables to be stored in local maven repository
+          ./.github/workflows/publish_conductor_custom.sh
           export CORE_CONDUCTOR_VERSION=$(./gradlew conductor-workflow-event-listener:dependencies | grep conductor-core | grep ">" | tail -1 | cut -d '>' -f 2 | cut -d ' ' -f 2)
           echo "Building against Conductor core version $CORE_CONDUCTOR_VERSION"
-          ./.github/workflows/publish_conductor_custom.sh
           ./gradlew build --scan -x test
       - name: Publish Unit Test Results
         uses: EnricoMi/publish-unit-test-result-action@v1
