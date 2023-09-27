@@ -1,11 +1,7 @@
 plugins {
     id 'groovy'
-    id 'project-report'
 }
 
-htmlDependencyReport {
-    projects = project.allprojects
-}
 
 dependencies {
 
