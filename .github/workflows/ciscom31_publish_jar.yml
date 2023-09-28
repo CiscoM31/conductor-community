@@ -9,6 +9,11 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - name: Extract branch name
+        if: github.event_name == 'push'
+        shell: bash
+        run: echo "::set-env name=BRANCH_NAME::$(echo ${GITHUB_REF#refs/heads/})"
+        id: extract_branch
       - uses: actions/checkout@v2
         with:
           ref: ${{ github.event.pull_request.head.sha }}
@@ -39,9 +44,14 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
+          # as github is not allowing password token to be stored in build files, unable to store conductor-custom deliverables into github packages
+          # hence executing conductor-custom build so that conductor-custom deliverables to be stored in local maven repository
+          echo "############################################################################################################################################"
+          ./.github/workflows/publish_conductor_custom.sh $BRANCH_NAME
+          echo "############################################################################################################################################"
           export CORE_CONDUCTOR_VERSION=$(./gradlew conductor-workflow-event-listener:dependencies | grep conductor-core | grep ">" | tail -1 | cut -d '>' -f 2 | cut -d ' ' -f 2)
           echo "Building against Conductor core version $CORE_CONDUCTOR_VERSION"
-          ./gradlew getCiscoM31ConductorLibs build --scan
+          ./gradlew build --scan -x test
       - name: Publish Unit Test Results
         uses: EnricoMi/publish-unit-test-result-action@v1
         if: always()

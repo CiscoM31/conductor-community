@@ -449,6 +449,11 @@ public class MySQLExecutionDAO extends MySQLBaseDAO
                                 .executeAndFetch(WorkflowModel.class));
     }
 
+    public Set<String> getWorkflowIdSetByCorrelationId(String correlationId) {
+        throw new UnsupportedOperationException(
+                "This method is not implemented in MySQLExecutionDAO. Please use ExecutionDAOFacade instead.");
+    }
+
     @Override
     public boolean canSearchAcrossWorkflows() {
         return true;

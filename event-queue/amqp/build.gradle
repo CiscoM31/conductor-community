@@ -1,6 +1,8 @@
 dependencies {
-    implementation "com.netflix.conductor:conductor-common:${revConductor}"
-    implementation "com.netflix.conductor:conductor-core:${revConductor}"
+
+    implementation "com.cisco.conductor:conductor-core:${revConductorCustom}"
+    implementation "com.cisco.conductor:conductor-common:${revConductorCustom}"
+
 
     implementation "com.rabbitmq:amqp-client:${revAmqpClient}"
     implementation "org.apache.commons:commons-lang3:"

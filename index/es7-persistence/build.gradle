@@ -14,8 +14,9 @@ ext['elasticsearch.version'] = revElasticSearch7
 dependencies {
 
     implementation project(':persistence:conductor-common-persistence')
-    implementation "com.netflix.conductor:conductor-common:${revConductor}"
-    implementation "com.netflix.conductor:conductor-core:${revConductor}"
+
+    implementation "com.cisco.conductor:conductor-core:${revConductorCustom}"
+    implementation "com.cisco.conductor:conductor-common:${revConductorCustom}"
 
 
     compileOnly 'org.springframework.boot:spring-boot-starter'
