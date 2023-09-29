@@ -54,7 +54,7 @@ public class Conductor {
                 properties.load(resource.getInputStream());
                 properties.forEach(
                         (key, value) -> System.setProperty((String) key, (String) value));
-                log.info("Loaded {} properties from {}", properties.size(), configFile);
+                log.info("Loaded {} properties commitid from {}", properties.size(), configFile);
             } else {
                 log.warn("Ignoring {} since it does not exist", configFile);
             }
