@@ -2,6 +2,7 @@ name: CiscoM31PublishJar
 
 on:
   push:
+  workflow_dispatch:
     branches:
       - main
 
