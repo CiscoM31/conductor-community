@@ -47,6 +47,7 @@ jobs:
           # as github is not allowing password token to be stored in build files, unable to store conductor-custom deliverables into github packages
           # hence executing conductor-custom build so that conductor-custom deliverables to be stored in local maven repository
           echo "############################################################################################################################################"
+          echo "Building conductuor custom jars"
           ./.github/workflows/publish_conductor_custom.sh ${{ steps.extract_branch.outputs.branch }}
           echo "############################################################################################################################################"
           export CORE_CONDUCTOR_VERSION=$(./gradlew conductor-workflow-event-listener:dependencies | grep conductor-core | grep ">" | tail -1 | cut -d '>' -f 2 | cut -d ' ' -f 2)
