@@ -43,6 +43,7 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
           echo "############################################################################################################################################"
+          echo "Building conductor-custom jars"
           ./.github/workflows/publish_conductor_custom.sh ${{ steps.extract_branch.outputs.branch }}
           echo "############################################################################################################################################"
           export CORE_CONDUCTOR_VERSION=$(./gradlew conductor-workflow-event-listener:dependencies | grep conductor-core | grep ">" | tail -1 | cut -d '>' -f 2 | cut -d ' ' -f 2)
@@ -51,8 +52,12 @@ jobs:
       - name: Build and Publish snapshot
         if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
         run: |
+          echo "############################################################################################################################################"
+          echo "Building conductor-custom jars"
+          ./.github/workflows/publish_conductor_custom.sh ${{ steps.extract_branch.outputs.branch }}
+          echo "############################################################################################################################################"
           echo "Running build for commit ${{ github.sha }}"
-          ./gradlew build snapshot --scan
+          ./gradlew build snapshot --scan -x test
         env:
           NETFLIX_OSS_SIGNING_KEY: ${{ secrets.ORG_SIGNING_KEY }}
           NETFLIX_OSS_SIGNING_PASSWORD: ${{ secrets.ORG_SIGNING_PASSWORD }}
@@ -74,4 +79,8 @@ jobs:
         with:
           name: build-scan
           path: 'buildscan.log'
-
+      - name: Store release jar
+        uses: actions/upload-artifact@v2
+        with:
+          name: build-jar
+          path: "community-server/build/libs/conductor-community-server-*-boot.jar"
