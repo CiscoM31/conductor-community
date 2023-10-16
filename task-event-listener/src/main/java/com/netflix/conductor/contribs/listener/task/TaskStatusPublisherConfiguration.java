@@ -9,8 +9,10 @@
  * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations under the License.
  */
-package com.netflix.conductor.contribs.publisher;
+package com.netflix.conductor.contribs.listener.task;
 
+import com.netflix.conductor.common.rest.ConductorRestNotificationProperties;
+import com.netflix.conductor.common.rest.RestClientManager;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -20,7 +22,7 @@ import com.netflix.conductor.core.dal.ExecutionDAOFacade;
 import com.netflix.conductor.core.listener.TaskStatusListener;
 
 @Configuration
-@EnableConfigurationProperties(ConductorWebhookNotificationProperties.class)
+@EnableConfigurationProperties(ConductorRestNotificationProperties.class)
 @ConditionalOnProperty(name = "conductor.task-status-listener.type", havingValue = "task_publisher")
 public class TaskStatusPublisherConfiguration {
 
@@ -28,7 +30,7 @@ public class TaskStatusPublisherConfiguration {
     public TaskStatusListener getTaskStatusListener(
             RestClientManager rcm,
             ExecutionDAOFacade executionDAOFacade,
-            ConductorWebhookNotificationProperties config) {
+            ConductorRestNotificationProperties config) {
 
         return new TaskStatusPublisher(rcm, executionDAOFacade, config.getSubscribedTaskStatuses());
     }

@@ -3,11 +3,8 @@ plugins {
 }
 dependencies {
 
-    implementation "com.cisco.conductor:conductor-core:${revConductorCustom}"
-    implementation "com.cisco.conductor:conductor-common:${revConductorCustom}"
-
-
     implementation "com.netflix.conductor:conductor-annotations:${revConductor}"
+
     implementation group: 'javax.inject', name: 'javax.inject', version: '1'
     implementation "org.apache.commons:commons-lang3:"
     implementation group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.14'
@@ -19,8 +16,6 @@ dependencies {
     testImplementation "org.spockframework:spock-core:${revSpock}"
     testImplementation "org.spockframework:spock-spring:${revSpock}"
 
-
-    testImplementation "com.cisco.conductor:conductor-server:${revConductorCustom}"
     testImplementation 'org.springframework.boot:spring-boot-starter-web'
     testImplementation project(':conductor-test-util').sourceSets.test.output
 }

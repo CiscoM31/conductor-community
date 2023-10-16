@@ -9,7 +9,7 @@
  * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations under the License.
  */
-package com.netflix.conductor.contribs.publisher;
+package com.netflix.conductor.common.rest;
 
 import java.io.IOException;
 import java.io.InterruptedIOException;
@@ -38,17 +38,17 @@ import org.slf4j.LoggerFactory;
 
 public class RestClientManager {
     private static final Logger logger = LoggerFactory.getLogger(RestClientManager.class);
-    private ConductorWebhookNotificationProperties config;
+    private ConductorRestNotificationProperties config;
     private CloseableHttpClient client;
     private String notifType;
     private String notifId;
 
-    enum NotificationType {
+    public enum NotificationType {
         TASK,
         WORKFLOW
     };
 
-    public RestClientManager(ConductorWebhookNotificationProperties config) {
+    public RestClientManager(ConductorRestNotificationProperties config) {
         logger.info("created RestClientManager" + System.currentTimeMillis());
         this.config = config;
         this.client = prepareClient();
@@ -177,7 +177,7 @@ public class RestClientManager {
                 .build();
     }
 
-    void postNotification(
+    public void postNotification(
             RestClientManager.NotificationType notifType,
             String data,
             String domainGroupMoId,

@@ -9,15 +9,7 @@
  * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations under the License.
  */
-package com.netflix.conductor.contribs.publisher;
-
-import java.util.LinkedHashMap;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import com.netflix.conductor.common.run.Workflow;
-import com.netflix.conductor.common.run.WorkflowSummary;
+package com.netflix.conductor.contribs.listener.workflow;
 
 import com.fasterxml.jackson.annotation.JsonFilter;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -25,6 +17,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ser.FilterProvider;
 import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
 import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
+import com.netflix.conductor.common.run.Workflow;
+import com.netflix.conductor.common.run.WorkflowSummary;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.util.LinkedHashMap;
 
 @JsonFilter("SecretRemovalFilter")
 class WorkflowNotification extends WorkflowSummary {
