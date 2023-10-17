@@ -19,10 +19,10 @@ import java.util.concurrent.LinkedBlockingDeque;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
-import com.netflix.conductor.common.rest.RestClientManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.netflix.conductor.common.rest.RestClientManager;
 import com.netflix.conductor.core.dal.ExecutionDAOFacade;
 import com.netflix.conductor.core.listener.TaskStatusListener;
 import com.netflix.conductor.model.TaskModel;
@@ -127,8 +127,7 @@ public class TaskStatusPublisher implements TaskStatusListener {
                     "Failed to enqueue task: Id {} Type {} of workflow {} ",
                     task.getTaskId(),
                     task.getTaskType(),
-                    task.getWorkflowInstanceId());
-            LOGGER.error(e.toString());
+                    task.getWorkflowInstanceId(),e);
         }
     }
 
@@ -140,8 +139,7 @@ public class TaskStatusPublisher implements TaskStatusListener {
                     "Failed to enqueue task: Id {} Type {} of workflow {} ",
                     task.getTaskId(),
                     task.getTaskType(),
-                    task.getWorkflowInstanceId());
-            LOGGER.debug(e.toString());
+                    task.getWorkflowInstanceId(),e);
         }
     }
 

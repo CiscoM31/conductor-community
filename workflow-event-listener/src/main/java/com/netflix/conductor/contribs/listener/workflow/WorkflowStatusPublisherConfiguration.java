@@ -11,16 +11,17 @@
  */
 package com.netflix.conductor.contribs.listener.workflow;
 
-import com.netflix.conductor.common.rest.ConductorRestNotificationProperties;
-import com.netflix.conductor.common.rest.RestClientManager;
-import com.netflix.conductor.core.dal.ExecutionDAOFacade;
-import com.netflix.conductor.core.listener.WorkflowStatusListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import com.netflix.conductor.common.rest.ConductorRestNotificationProperties;
+import com.netflix.conductor.common.rest.RestClientManager;
+import com.netflix.conductor.core.dal.ExecutionDAOFacade;
+import com.netflix.conductor.core.listener.WorkflowStatusListener;
 
 @Configuration
 @EnableConfigurationProperties(ConductorRestNotificationProperties.class)

@@ -11,13 +11,13 @@
  */
 package com.netflix.conductor.contribs.listener.task;
 
-import com.netflix.conductor.common.rest.ConductorRestNotificationProperties;
-import com.netflix.conductor.common.rest.RestClientManager;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import com.netflix.conductor.common.rest.ConductorRestNotificationProperties;
+import com.netflix.conductor.common.rest.RestClientManager;
 import com.netflix.conductor.core.dal.ExecutionDAOFacade;
 import com.netflix.conductor.core.listener.TaskStatusListener;
 
