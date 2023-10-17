@@ -9,7 +9,7 @@
  * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations under the License.
  */
-package com.netflix.conductor.contribs.publisher;
+package com.netflix.conductor.contribs.listener.task;
 
 import java.io.IOException;
 import java.util.List;
@@ -22,6 +22,7 @@ import javax.inject.Singleton;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.netflix.conductor.common.rest.RestClientManager;
 import com.netflix.conductor.core.dal.ExecutionDAOFacade;
 import com.netflix.conductor.core.listener.TaskStatusListener;
 import com.netflix.conductor.model.TaskModel;
@@ -126,8 +127,7 @@ public class TaskStatusPublisher implements TaskStatusListener {
                     "Failed to enqueue task: Id {} Type {} of workflow {} ",
                     task.getTaskId(),
                     task.getTaskType(),
-                    task.getWorkflowInstanceId());
-            LOGGER.error(e.toString());
+                    task.getWorkflowInstanceId(),e);
         }
     }
 
@@ -139,8 +139,7 @@ public class TaskStatusPublisher implements TaskStatusListener {
                     "Failed to enqueue task: Id {} Type {} of workflow {} ",
                     task.getTaskId(),
                     task.getTaskType(),
-                    task.getWorkflowInstanceId());
-            LOGGER.debug(e.toString());
+                    task.getWorkflowInstanceId(),e);
         }
     }
 

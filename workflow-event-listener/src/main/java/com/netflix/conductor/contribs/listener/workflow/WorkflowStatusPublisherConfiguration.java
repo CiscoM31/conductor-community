@@ -9,7 +9,7 @@
  * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations under the License.
  */
-package com.netflix.conductor.contribs.publisher;
+package com.netflix.conductor.contribs.listener.workflow;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,13 +18,13 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import com.netflix.conductor.common.rest.ConductorRestNotificationProperties;
+import com.netflix.conductor.common.rest.RestClientManager;
 import com.netflix.conductor.core.dal.ExecutionDAOFacade;
 import com.netflix.conductor.core.listener.WorkflowStatusListener;
 
-// @ConditionalOnProperty(name = "conductor.webhook.enabled", havingValue = "true")
-
 @Configuration
-@EnableConfigurationProperties(ConductorWebhookNotificationProperties.class)
+@EnableConfigurationProperties(ConductorRestNotificationProperties.class)
 @ConditionalOnProperty(
         name = "conductor.workflow-status-listener.type",
         havingValue = "workflow_publisher")
@@ -34,7 +34,7 @@ public class WorkflowStatusPublisherConfiguration {
             LoggerFactory.getLogger(WorkflowStatusPublisherConfiguration.class);
 
     @Bean
-    public RestClientManager getRestClientManager(ConductorWebhookNotificationProperties config) {
+    public RestClientManager getRestClientManager(ConductorRestNotificationProperties config) {
         return new RestClientManager(config);
     }
 

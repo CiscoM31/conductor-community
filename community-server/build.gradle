@@ -47,7 +47,8 @@ dependencies {
     //implementation project(':task:conductor-kafka')
 
     implementation project(':conductor-workflow-event-listener')
-    implementation project(':conductor-webhook')
+    implementation project(':task-event-listener')
+    implementation project(':common')
 
     implementation 'org.springframework.boot:spring-boot-starter'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
