@@ -11,13 +11,12 @@
  */
 package com.netflix.conductor.contribs.listener.task;
 
-import java.util.LinkedHashMap;
 
+import com.netflix.conductor.common.run.TaskLog;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.netflix.conductor.common.metadata.tasks.Task;
-import com.netflix.conductor.common.run.TaskSummary;
 
 import com.fasterxml.jackson.annotation.JsonFilter;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -27,14 +26,11 @@ import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
 import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
 
 @JsonFilter("SecretRemovalFilter")
-public class TaskNotification extends TaskSummary {
+public class TaskNotification extends TaskLog {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(TaskStatusPublisher.class);
 
     public String workflowTaskType;
-    private String domainGroupMoId = "";
-    private String accountMoId = "";
-
     /**
      * following attributes doesnt exist in TaskSummary so add it here. Not adding in TaskSummary as
      * it belongs to conductor-common
@@ -46,14 +42,6 @@ public class TaskNotification extends TaskSummary {
     private String taskDescription;
 
     private ObjectMapper objectMapper = new ObjectMapper();
-
-    public String getDomainGroupMoId() {
-        return domainGroupMoId;
-    }
-
-    public String getAccountMoId() {
-        return accountMoId;
-    }
 
     public String getReferenceTaskName() {
         return referenceTaskName;
@@ -80,19 +68,9 @@ public class TaskNotification extends TaskSummary {
         if (!isFusionMetaPresent) {
             return;
         }
-
-        LinkedHashMap fusionMeta = (LinkedHashMap) task.getInputData().get("_ioMeta");
-        domainGroupMoId =
-                fusionMeta.containsKey("DomainGroupMoId")
-                        ? fusionMeta.get("DomainGroupMoId").toString()
-                        : "";
-        accountMoId =
-                fusionMeta.containsKey("AccountMoId")
-                        ? fusionMeta.get("AccountMoId").toString()
-                        : "";
     }
 
-    String toJsonString() {
+    public String toJsonString() {
         String jsonString;
         SimpleBeanPropertyFilter theFilter =
                 SimpleBeanPropertyFilter.serializeAllExcept("input", "output");
@@ -112,7 +90,7 @@ public class TaskNotification extends TaskSummary {
      * To enable Workflow/Task Summary Input/Output JSON Serialization, use the following:
      * conductor.app.summary-input-output-json-serialization.enabled=true
      */
-    String toJsonStringWithInputOutput() {
+    public String toJsonStringWithInputOutput() {
         String jsonString;
         try {
             SimpleBeanPropertyFilter emptyFilter = SimpleBeanPropertyFilter.serializeAllExcept();
