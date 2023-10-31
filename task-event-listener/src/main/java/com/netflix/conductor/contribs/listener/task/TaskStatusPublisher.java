@@ -112,6 +112,12 @@ public class TaskStatusPublisher implements TaskStatusListener {
         this.rcm = rcm;
         this.executionDAOFacade = executionDAOFacade;
         this.subscribedTaskStatusList = subscribedTaskStatuses;
+        if (this.subscribedTaskStatusList.isEmpty()) {
+            LOGGER.error(
+                    "SubscribedTaskStatusList is empty. None of the notification might be sent to fusion");
+        } else {
+            LOGGER.info("SubscribedTaskStatusList {}", this.subscribedTaskStatusList);
+        }
         ConsumerThread consumerThread = new ConsumerThread();
         consumerThread.start();
     }
@@ -127,7 +133,8 @@ public class TaskStatusPublisher implements TaskStatusListener {
                     "Failed to enqueue task: Id {} Type {} of workflow {} ",
                     task.getTaskId(),
                     task.getTaskType(),
-                    task.getWorkflowInstanceId(),e);
+                    task.getWorkflowInstanceId(),
+                    e);
         }
     }
 
@@ -139,7 +146,8 @@ public class TaskStatusPublisher implements TaskStatusListener {
                     "Failed to enqueue task: Id {} Type {} of workflow {} ",
                     task.getTaskId(),
                     task.getTaskType(),
-                    task.getWorkflowInstanceId(),e);
+                    task.getWorkflowInstanceId(),
+                    e);
         }
     }
 
