@@ -11,12 +11,11 @@
  */
 package com.netflix.conductor.contribs.listener.task;
 
-
-import com.netflix.conductor.common.run.TaskLog;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.netflix.conductor.common.metadata.tasks.Task;
+import com.netflix.conductor.common.run.TaskLog;
 
 import com.fasterxml.jackson.annotation.JsonFilter;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -31,6 +30,7 @@ public class TaskNotification extends TaskLog {
     private static final Logger LOGGER = LoggerFactory.getLogger(TaskStatusPublisher.class);
 
     public String workflowTaskType;
+
     /**
      * following attributes doesnt exist in TaskSummary so add it here. Not adding in TaskSummary as
      * it belongs to conductor-common
