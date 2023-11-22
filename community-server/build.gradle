@@ -19,6 +19,7 @@ dependencies {
     implementation "com.cisco.conductor:conductor-rest:${revConductorCustom}"
 
     implementation "com.cisco.conductor:conductor-redis-persistence:${revConductorCustom}"
+    implementation "com.cisco.conductor:conductor-redis-lock:${revConductorCustom}"
     //implementation "com.netflix.conductor:conductor-cassandra-persistence:${revConductor}"
     //implementation "com.netflix.conductor:conductor-grpc-server:${revConductor}"
     //implementation "com.netflix.conductor:conductor-redis-lock:${revConductor}"
