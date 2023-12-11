@@ -3,7 +3,7 @@
  */
 ext {
     revConductor = '3.15.0'
-    revConductorCustom = '3.13.8-cisco'
+    revConductorCustom = '3.15.0-cisco'
     revActivation = '2.0.0'
     revAmqpClient = '5.13.0'
     revAwaitility = '3.1.6'
