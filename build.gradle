@@ -29,26 +29,6 @@ allprojects {
     }
 }
 
-/**
- * Download dependencies from CiscoM31/conductor-custom files to build dir
- * Set array of urls
- * 
- * Note: If only one download source has been given, adding an eachFile action will make the plugin fail. Refer
- * https://github.com/michel-kraemer/gradle-download-task#download-task
- */
-ext.urls = [
-    'https://github.com/CiscoM31/conductor-custom/releases/download/3.13-build.7%2B71353d92f92d89cbf3679a66911f36c5dfa041da/conductor-core-0.1.0-SNAPSHOT.jar': 'conductor-core-ciscom31.jar',
-    'https://github.com/CiscoM31/conductor-custom/releases/download/3.13-build.7%2B71353d92f92d89cbf3679a66911f36c5dfa041da/conductor-common-0.1.0-SNAPSHOT.jar': 'conductor-common-ciscom31.jar',
-    'https://github.com/CiscoM31/conductor-custom/releases/download/3.13-build.7%2B71353d92f92d89cbf3679a66911f36c5dfa041da/conductor-rest-0.1.0-SNAPSHOT.jar': 'conductor-rest-ciscom31.jar'
-]
-
-task getCiscoM31ConductorLibs(type: Download) {
-    src urls.keySet()
-    dest buildDir
-    eachFile { f ->
-        f.name = urls[f.sourceURL.toString()]
-    }
-}
 
 // Establish version and status
 ext.githubProjectName = rootProject.name // Change if github project name is not the same as the root project's name
@@ -65,8 +45,8 @@ allprojects {
     apply plugin: 'java-library'
     apply plugin: 'project-report'
 
-    sourceCompatibility = JavaVersion.VERSION_11
-    targetCompatibility = JavaVersion.VERSION_11
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
 
     group = 'com.netflix.conductor'
 

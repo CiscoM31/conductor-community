@@ -1064,4 +1064,14 @@ public class MySQLExecutionDAO extends MySQLBaseDAO
         Preconditions.checkNotNull(
                 task.getReferenceTaskName(), "Task reference name cannot be null");
     }
+
+    @Override
+    public String addLock(String key, String value, int expireTimeInSeconds) {
+        return null;
+    }
+
+    @Override
+    public Long removeLock(String key) {
+        return null;
+    }
 }
